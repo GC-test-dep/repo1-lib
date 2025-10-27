@@ -1,12 +1,17 @@
 name: Java CI Publish
 
+# explicit permissions for GITHUB_TOKEN
+permissions:
+  contents: read        # read repo contents (for checkout)
+  packages: write       # allow publishing packages
+  id-token: write       # only needed for OIDC flows (optional)
+
 on:
   push:
     branches:
       - main
     tags:
-      - 'v*'   # publish on tags v*
-  # optionally also keep manual dispatch
+      - 'v*'
   workflow_dispatch:
 
 jobs:
@@ -43,6 +48,5 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          # GITHUB_TOKEN is automatically available in Actions
-          GPR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn -B deploy -DskipTests -s ${{ github.workspace }}/settings.xml
