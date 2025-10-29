@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>repo1-lib</artifactId>
-    <version>0.0.4</version>
+    <version>1.0.4</version>
     <packaging>jar</packaging>
     <name>repo1-lib</name>
 
